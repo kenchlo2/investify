@@ -6,10 +6,10 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
-app.get('/src/styles.css', (req, res) => {
+app.get('/client/src/styles.css', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/src/styles.css'));
 });
 

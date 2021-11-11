@@ -37,7 +37,7 @@ module.exports = {
     publicPath: '/build',
     proxy: {
       '/': 'http://localhost:3000',
-      '/src/styles.css': 'http://localhost:3000/src/styles.css'
+      '/client/src/styles.css': 'http://localhost:3000/client/src/styles.css'
     }
   }
 };
