@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/server.js",
-    "build": "webpack",
-    "buildstart": "nodemon server/server.js & webpack",
+    "build": "webpack --mode production",
+    "buildstart": "nodemon server/server.js & webpack --mode production",
     "dev": "nodemon server/server.js & webpack serve --open",
-    "test": "jest --verbose",
     "date_template": "node server/src/date_template.js"
   },
   "keywords": [
