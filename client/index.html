@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investify</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="src/styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4">
+        <form class="well">
+          <h1>Investify</h1>
+          <br/>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group shiny-input-container">
+                <label class="control-label" for="stock">Stock code:</label>
+                  <input id="stock" type="text" class="form-control" value=""/>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <button id="go" style="width: 100%;" type="button" class="btn btn-default action-button">Go</button>
+              </div>
+              <div class="col-sm-3">
+                <button id="update" style="width: 100%;" type="button" class="btn btn-default action-button">Update</button>
+              </div>
+              <div class="col-sm-3"></div>
+              <div class="col-sm-3">
+                <button id="delete" style="width: 100%;" type="button" class="btn btn-default action-button">Delete</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group shiny-input-container">
+                  <label class="control-label" for="start_weekday">Starting weekday:</label>
+                  <div>
+                    <select id="start_weekday" class="selectize-input">
+                      <option value="1">Monday</option>
+                      <option value="2">Tuesday</option>
+                      <option value="3">Wednesday</option>
+                      <option value="4">Thursday</option>
+                      <option value="5" selected>Friday</option>
+                      <option value="-1">Any</option></select>
+                    <script type="application/json" data-for="start_weekday" data-nonempty="">{}</script>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div id="start_oc" class="form-group shiny-input-radiogroup shiny-input-container">
+                  <label class="control-label" for="start_oc"></label>
+                  <div class="shiny-options-group">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="start_oc" value="open" checked="checked"/>
+                        <span>Open</span>
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="start_oc" value="close"/>
+                        <span>Close</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group shiny-input-container">
+                  <label class="control-label" for="n_days">Duration:</label>
+                  <input id="n_days" type="number" class="form-control" value="7"/>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div id="end_oc" class="form-group shiny-input-radiogroup shiny-input-container">
+                  <label class="control-label" for="end_oc"></label>
+                  <div class="shiny-options-group">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="end_oc" value="open"/>
+                        <span>Open</span>
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="end_oc" value="close" checked="checked"/>
+                        <span>Close</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-11">
+                <div id="date_range" class="shiny-date-range-input form-group shiny-input-container">
+                  <label class="control-label" id="date_range-label" for="date_range">Analysis period:</label>
+                  <div class="input-daterange input-group input-group-sm">
+                    <input class="form-control" id="date_range_from" type="text" aria-labelledby="date_range-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-initial-date data-date-autoclose="true" data-provide="datepicker" />
+                    <span class="input-group-addon input-group-prepend input-group-append">
+                      <span class="input-group-text">
+                        <strong>to</strong>
+                      </span>
+                    </span>
+                    <input class="form-control" id="date_range_to" type="text" aria-labelledby="date_range-label" title="Date format: yyyy-mm-dd" data-date-language="en" data-date-week-start="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" data-initial-date data-date-autoclose="true" data-provide="datepicker" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div id="event" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline">
+                  <label class="control-label" for="event">Event filter:</label>
+                  <div class="shiny-options-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="event" value="None" checked="checked"/>
+                      <span>None</span>
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="event" value="Earnings"/>
+                      <span>Earnings</span>
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="event" value="Dividends"/>
+                      <span>Dividends</span>
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="event" value="Stock splits"/>
+                      <span>Stock splits</span>
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="event" value="Custom dates"/>
+                      <span>Custom dates</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-9">
+                <strong>Custom dates:</strong>
+                <style type="text/css">textarea {width:100%}</style>
+                <textarea id="custom_dates" rows="5"></textarea>
+              </div>
+              <div class="col-sm-3">
+                <br/>
+                <button id="submit" style="width: 100%;" type="button" class="btn btn-default action-button">Submit</button>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-sm-12">
+                <strong>Threshold of % change:</strong>
+              </div>
+              <div class="col-sm-2" style="margin-top:-15px">
+                <div id="eb" class="form-group shiny-input-radiogroup shiny-input-container">
+                  <label class="control-label" for="eb"></label>
+                  <div class="shiny-options-group">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="eb" value="Exceed"/>
+                        <span>Exceed</span>
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="eb" value="Below" checked="checked"/>
+                        <span>Below</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group shiny-input-container">
+                  <label class="control-label" for="threshold"></label>
+                  <input id="threshold" type="number" class="form-control" value="-10"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group shiny-input-container">
+                  <label class="control-label" for="show_preceeding">Show # preceeding weeks: </label>
+                  <input id="show_preceeding" type="number" class="form-control" value="0"/>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group shiny-input-container">
+                  <label class="control-label" for="show_trailing">Show # trailing weeks: </label>
+                  <input id="show_trailing" type="number" class="form-control" value="0"/>
+                </div>
+              </div>
+            </div>
+            <div class="row" hidden>
+              <div class="col-sm-3">
+                <button id="save_output" style="width: 100%;" type="button" class="btn btn-default action-button">Save ouput</button>
+              </div>
+              <div class="col-sm-3">
+                <button id="save_statistics" style="width: 100%;" type="button" class="btn btn-default action-button">Save statistics</button>
+              </div>
+            </div>
+          </form>
+      </div>
+      <!-- main begins -->
+      <div id="main" class="col-sm-8"></div>
+    </div>
+  </div>
+  <script src="build/bundle.js"></script>
+</body>
+
+</html>
