@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: './client/index.js',
@@ -18,9 +19,20 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
-      }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
+      }      
     ]
   },
+  plugins: [
+    new HtmlWebPackPlugin()
+  ],
   devServer: {
     publicPath: '/build',
     proxy: {

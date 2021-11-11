@@ -41,6 +41,8 @@
     "d3": "^7.0.0",
     "datatables.net": "^1.10.25",
     "datatables.net-dt": "^1.10.25",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.5.0",
     "isomorphic-fetch": "^3.0.0",
     "nodemon": "^2.0.7",
     "sass": "^1.34.1",
